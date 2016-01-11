@@ -4,8 +4,11 @@ navbar
   .row
     .col-lg-2
       label Number to graph: 
-      input(ng-model="drawNum")
-      button(ng-click="main.drawValue()") Draw
+      input(ng-model="drawNum" type="number" ng-change="main.drawValue()")
+      label Spacing (12 is good)
+      input(ng-model="spacing" type="number" ng-change="main.drawValue()")
+      label Dot Size (3 is good)
+      input(ng-model="pointSize" type="number" ng-change="main.drawValue()")
     .col-lg-8
       canvas#drawspace(width="800" height="600" style="border:0px solid #000000;")
     .col-lg-2
