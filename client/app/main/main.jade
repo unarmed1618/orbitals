@@ -9,6 +9,8 @@ navbar
       input(ng-model="spacing" type="number" ng-change="main.drawValue()")
       label Dot Size (3 is good)
       input(ng-model="pointSize" type="number" ng-change="main.drawValue()")
+      button#clockenate(ng-click="main.clockify()") Clock
+      button(ng-click="main.declockify()") Stop Clock
     .col-lg-8
       canvas#drawspace(width="800" height="600" style="border:0px solid #000000;")
     .col-lg-2

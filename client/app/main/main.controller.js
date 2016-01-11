@@ -4,15 +4,19 @@
 
 class MainController {
 
-  constructor($scope) {
+  constructor($scope,$http,$timeout) {
   	this.$scope = $scope;
+  	this.$http = $http;
+  	this.$timeout = $timeout;
     this.canvas = document.getElementById("drawspace");
     this.$scope.spacing=12;
     this.$scope.pointSize=3;
+    this.$scope.drawNum=1;
 	this.canvasContext = this.canvas.getContext("2d");
 	this.xc=this.canvas.width/2;
 	this.yc=this.canvas.height/2;
 	this.spacing=10;
+	
   }
     //Express a positive number as an orbital number.
     drawValue(){
@@ -33,6 +37,19 @@ class MainController {
 		}
     
     }
+    
+    clockify(){
+    	var msDay = 86400000;
+		//console.log(Math.floor((Date.now()%msDay)/1000));
+		this.$scope.drawNum=Math.floor((Date.now()%msDay)/1000);
+		this.drawValue();
+		this.breaker = this.$timeout(function(){$("#clockenate").click()},1000);
+		
+	}
+	
+	declockify(){
+		this.$timeout.cancel(this.breaker);
+	}
     clear() {
     	this.canvasContext.fillStyle="#FFFFFF";
     	this.canvasContext.fillRect(0,0,this.canvas.width,this.canvas.height);
@@ -76,6 +93,8 @@ class MainController {
 		else
 			ctx.stroke();
 	}
+	
+	
 
 }
 
