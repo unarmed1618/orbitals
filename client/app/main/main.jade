@@ -3,8 +3,10 @@ navbar
 .container
   .row
     .col-lg-2
+      label Base to graph in:
+      input(ng-model="base" type="number" ng-change="main.drawValue()")   
       label Number to graph: 
-      input(ng-model="drawNum" type="number" ng-change="main.drawValue()")
+      input(ng-model="drawNum" type="text" ng-change="main.drawValue()")
       label Spacing (12 is good)
       input(ng-model="spacing" type="number" ng-change="main.drawValue()")
       label Dot Size (3 is good)

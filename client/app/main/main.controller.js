@@ -8,6 +8,8 @@ class MainController {
   	this.$scope = $scope;
   	this.$http = $http;
   	this.$timeout = $timeout;
+	this.$scope.base=10;
+
     this.canvas = document.getElementById("drawspace");
     this.$scope.spacing=12;
     this.$scope.pointSize=3;
@@ -22,6 +24,7 @@ class MainController {
     drawValue(){
 		this.clear();
 		var localNum = this.$scope.drawNum;
+		
 		var arraychar = localNum.toString().split('');
 		if(arraychar[0]=='-'){
 			this.isNegative=true;
@@ -41,7 +44,7 @@ class MainController {
     clockify(){
     	var msDay = 86400000;
 		//console.log(Math.floor((Date.now()%msDay)/1000));
-		this.$scope.drawNum=Math.floor((Date.now()%msDay)/1000);
+		this.$scope.drawNum=Math.floor((Date.now()%msDay)/1000).toString(this.$scope.base);
 		this.drawValue();
 		this.breaker = this.$timeout(function(){$("#clockenate").click()},1000);
 		
@@ -56,9 +59,11 @@ class MainController {
     	this.canvasContext.fillStyle="#000000";
     }
 
-	drawPoints(num,radius){
-		if(num==0){}
+	drawPoints(numPre,radius){
+		if(numPre==0){}
 		else{
+			var num = parseInt(numPre, this.$scope.base);
+			//console.log("numPre: " + numPre + "--> " + num);
 			var radcut = this.divideRadians(num);
 			for(var i=0;i<num;i++){
 				this.drawPoint(this.xc+Math.cos(radcut*i)*this.$scope.spacing*radius,this.yc+Math.sin(radcut*i)*this.$scope.spacing*radius);
